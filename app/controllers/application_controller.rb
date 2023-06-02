@@ -1,4 +1,5 @@
 class ApplicationController < ActionController::Base
+  include JwtTokenAuthorize
 
   def authenticate_user
     token      = request.headers['Authorization']&.split(' ')&.last
