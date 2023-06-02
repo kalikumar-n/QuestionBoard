@@ -1,9 +1,8 @@
 Rails.application.routes.draw do
-
-  resources :questions
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
-  resources :users
-
   post '/login', to: 'authentication#login'
+  resources :users
+  resources :questions
+  post '/create_questions_from_csv', to: 'questions#create_questions_from_csv'
 end
