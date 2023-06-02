@@ -1,6 +1,5 @@
 class ApplicationController < ActionController::Base
   include JwtTokenAuthorize
-  before_action :authenticate_user
   def authenticate_user
     token      = request.headers['Authorization']&.split(' ')&.last
     begin
