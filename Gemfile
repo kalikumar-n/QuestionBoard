@@ -44,6 +44,7 @@ gem "bootsnap", require: false
 
 #For ActiveAdmin Installation with Authentication
 gem 'activeadmin'
+gem 'arctic_admin'
 gem 'devise'
 gem 'bcrypt', '~> 3.1.7'
 gem 'jwt'
