@@ -45,7 +45,7 @@ gem "bootsnap", require: false
 #For ActiveAdmin Installation with Authentication
 gem 'activeadmin'
 gem 'devise'
-
+gem 'bcrypt', '~> 3.1.7'
 # Use Sass to process CSS
 gem "sassc-rails"
 
