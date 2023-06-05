@@ -1,0 +1,16 @@
+<html>
+<head>
+  <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+</head>
+<body>
+<h1>Hi, This email is from Question Board, Here's the questions you have requested</h1>
+  <% count = 0 %>
+  <% @questions.each do |question|%>
+    <p>Question <%= count %></p>
+    <p>Question Title<%= question.title %></p>
+    <p>Question Description <%= question.description %></p>
+    <p>Question Created At <%= question.created_at.strftime('%d-%m-%y') %></p>
+    <% count+=1 %>
+  <% end %>
+</body>
+</html>
