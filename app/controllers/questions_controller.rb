@@ -5,8 +5,8 @@ class QuestionsController < ApplicationController
 
   def index
     @questions = @current_user.questions.all
-    QuestionMailer.mail_questions(@current_user.email, @questions).deliver_now
-    render json: @questions, status: :ok
+    # QuestionMailer.mail_questions(@current_user.email, @questions).deliver_now
+    render json: QuestionSerializer.new(@questions, ).serialized_json, status: :ok
   end
 
   def show

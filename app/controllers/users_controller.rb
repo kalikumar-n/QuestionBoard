@@ -6,7 +6,7 @@ class UsersController < ApplicationController
 
   def index
     @users = User.all
-    render json: @users, status: :ok
+    render json: UserSerializer.new(@users, include: [:questions]).serialized_json, status: :ok
   end
 
   def show
