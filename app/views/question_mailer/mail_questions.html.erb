@@ -7,10 +7,22 @@
   <% count = 0 %>
   <% @questions.each do |question|%>
     <p>Question <%= count %></p>
-    <p>Question Title<%= question.title %></p>
-    <p>Question Description <%= question.description %></p>
-    <p>Question Created At <%= question.created_at.strftime('%d-%m-%y') %></p>
+    <p>Question Title :<%= question.title %></p>
+    <p>Question Description :<%= question.description %></p>
+    <p>Question Created At :<%= question.created_at.strftime('%d-%m-%y') %></p>
+    <h3>Attachments</h3>
+    <% if question.file.attached? %>
+      <% content_type = question.file.blob.content_type %>
+      <% if content_type.start_with?('image/') %>
+        <%= image_tag question.file.variant(resize_to_fill: [100, 100]) %>
+      <% elsif content_type.start_with?('video/') %>
+        <%= video_tag url_for(question.file), :size => "320x240", controls: true %>
+      <% end %>
+    <% else %>
+      <p>Attachments Not Found</p>
+      <br><br>
+    <% end %>
     <% count+=1 %>
-  <% end %>
+   <% end %>
 </body>
 </html>
