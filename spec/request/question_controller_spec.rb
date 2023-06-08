@@ -24,14 +24,15 @@ RSpec.describe QuestionsController, type: :controller do
   end
 
   describe "UPDATE" do
-    it 'Should Restrict to update :title, :description, :file'do
+    it 'Should Restrict to :title, :description, :file'do
       params = {
         id: question.id,
         title: 'New title',
         description: 'Description of new title'
       }
       should permit(:title, :description).
-        for(:update, params: params)
+        for(:update, params: params).
+        on(:question)
     end
   end
 
