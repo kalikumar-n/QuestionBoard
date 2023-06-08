@@ -10,7 +10,11 @@ class QuestionsController < ApplicationController
   end
 
   def show
-    render json: @question, status: :ok
+    if @question.present?
+      render json: @question, status: :ok
+    else
+      render json: {errors: 'Not found' }, status: :not_found
+    end
   end
 
   def create

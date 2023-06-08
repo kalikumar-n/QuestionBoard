@@ -1,11 +1,38 @@
 require 'rails_helper'
 
-RSpec.describe QuestionsController, type: :request do
-
+RSpec.describe QuestionsController, type: :controller do
+  let(:token) {'eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJ1c2VyX2VtYWlsIjoidGVzdGluZ3NhbXBsZUBnbWFpbC5jb20iLCJleHAiOjE2ODY3OTgwNzR9.1x3xBOYkbCNYD7czhn9wmeeWOOwG07tSr-gzxHoT9ZA'}
+  let(:question) {create(:question)}
   describe "GET #INDEX" do
-    it 'should returns all items' do
-      get "/questions", headers: { 'Authorization' => "Bearer #{'eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJ1c2VyX2VtYWlsIjoidGVzdHVzZXJAZ21haWwuY29tIiwiZXhwIjoxNjg2NTYxMjEzfQ.VYFtCk78Vg1rM_AQNZ8Z-cejU3SXkwS7YebgPltCYWc'}" }
-      expect(response.body).to include('when will laptop’s get wireless charging')
+    context 'when the user is authorized' do
+      before do
+        request.headers['Authorization'] = "Bearer #{token}"
+        get :index
+      end
+      it { should respond_with(200) }
+      it 'should returns all Questions' do
+        expect(response.body).to include("For testing custom paths")
+      end
+    end
+
+    context 'when the user is not authorized' do
+      before do
+        get :index
+      end
+      it { should respond_with(401)}
     end
   end
+
+  describe "UPDATE" do
+    it 'Should Restrict to update :title, :description, :file'do
+      params = {
+        id: question.id,
+        title: 'New title',
+        description: 'Description of new title'
+      }
+      should permit(:title, :description).
+        for(:update, params: params)
+    end
+  end
+
 end
