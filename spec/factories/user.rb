@@ -1,16 +1,19 @@
 FactoryBot.define do
   factory :user do
-    name { 'Factory Bot' }
-    email { generate(:random_email) }
     active { true }
-    password { generate(:password) }
+    name { Faker::Esport.player }
+    email { generate(:random_email) }
+    password { Faker::Internet.password(min_length: 8) }
+
+    trait :inactive do
+      active {false}
+    end
+
+    factory :inactive_user, traits: [:inactive]
   end
 
   sequence :random_email do |n|
     Faker::Internet.unique.email.gsub('@', "-#{n}@")
   end
 
-  sequence :password do
-    Faker::Internet.password(min_length: 8)
-  end
 end
