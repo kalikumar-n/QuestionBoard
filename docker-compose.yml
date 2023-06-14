@@ -1,13 +1,6 @@
 version: '3.8'
 
 services:
-  db:
-    image: postgres:latest
-    environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
-      POSTGRES_DB: QuestionBoard_development
-
   app:
     build:
       context: .
@@ -18,4 +11,16 @@ services:
       DATABASE_URL: postgres://postgres:postgres@db:5432/postgres
     depends_on:
       - db
+
+  db:
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: QuestionBoard_development
+    volumes:
+      - question_board:/var/lib/postgresql/data
+
+volumes:
+  question_board:
 
