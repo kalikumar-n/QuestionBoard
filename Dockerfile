@@ -3,11 +3,13 @@ FROM ruby:3.0.1
 RUN apt-get update -qq \
     && apt-get install -y nodejs postgresql-client
 
-ADD . /Rails-Docker
-
 WORKDIR /Rails-Docker
 
+COPY Gemfile Gemfile.lock ./
+
 RUN bundle install
+
+COPY . .
 
 EXPOSE 3000
 
