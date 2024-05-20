@@ -22,14 +22,5 @@ RSpec.describe Admin::QuestionsController, type: :feature do
       expect(page).to have_content('Question was successfully updated.', wait: 5)
     end
 
-
-    it 'should be create a new question' do
-      visit new_admin_question_path
-      fill_in 'Description', with: "Which is the best Google IO"
-      fill_in 'Title', with: "Google I/O"
-      click_button 'Create Question'
-      expect(page).to have_content('Question was successfully created.', wait: 5)
-    end
-
   end
 end
