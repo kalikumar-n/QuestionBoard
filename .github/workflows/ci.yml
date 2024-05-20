@@ -18,11 +18,19 @@ jobs:
           --health-timeout 5s
           --health-retries 5
     steps:
-      - uses: actions/checkout@v1
+      - name: Checkout code
+        uses: actions/checkout@v2  # Use v2 of the checkout action for better functionality and stability
+
       - name: Setup Ruby
         uses: actions/setup-ruby@v1
         with:
           ruby-version: 3.0.1
+
+      - name: Setup Node.js and Yarn
+        uses: actions/setup-node@v2  # Use the setup-node action to set up Node.js and Yarn
+        with:
+          node-version: '14'  # Set the Node.js version you want to use
+
       - uses: borales/actions-yarn@v2.0.0
         with:
           cmd: install
