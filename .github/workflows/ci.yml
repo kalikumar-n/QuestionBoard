@@ -24,7 +24,7 @@ jobs:
       - name: Setup Ruby
         uses: actions/setup-ruby@v1
         with:
-          ruby-version: 3.0.x
+          ruby-version: 2.6.x
 
       - name: Setup Node.js and Yarn
         uses: actions/setup-node@v2  # Use the setup-node action to set up Node.js and Yarn
